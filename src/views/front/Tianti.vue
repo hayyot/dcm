@@ -11,7 +11,15 @@
       </div>
       <div class="content-nr">
         <div class="nr-bj">
-
+          <div>
+            i5-13400f
+          </div>
+          <div>
+            <img src="../../assets/imgs/bg.jpg" height="50px" alt="">
+          </div>
+          <div>
+            <el-progress :text-inside="true" :stroke-width="24" :percentage="100" status="exception"></el-progress>
+          </div>
         </div>
       </div>
     </div>
@@ -54,9 +62,18 @@ export default {
 .content-nr {
   width: 100%;
   background-color: rgb(146, 136, 144);
-  height: 200px;
 }
 .nr-bj {
+  margin-top: 10px;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+}
+.nr-bj > div {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
