@@ -2,10 +2,10 @@
   <div class="main-content">
     <div class="content">
       <div style="margin-top: 20px; display: flex;flex-direction: row;width: 100%;justify-content: space-around;">
-        <div style="font-size: 20px;display: flex;justify-content: center;align-items: center; background-color: #fff; border: 1px solid rgb(181, 247, 242);width: 100px; height: 40px;">
+        <div @click="isCpu = true" style="font-size: 20px;display: flex;justify-content: center;align-items: center; background-color: #fff; border: 1px solid rgb(181, 247, 242);width: 100px; height: 40px;">
           <p>CPU</p>
         </div>
-        <div style="font-size: 20px;display: flex;justify-content: center;align-items: center; background-color: #fff; border: 1px solid rgb(181, 247, 242);width: 100px; height: 40px;">
+        <div @click="isCpu = false" style="font-size: 20px;display: flex;justify-content: center;align-items: center; background-color: #fff; border: 1px solid rgb(181, 247, 242);width: 100px; height: 40px;">
           <p>GPU</p>
         </div>
       </div>
@@ -24,19 +24,35 @@
             硬件价格
           </div>
         </div>
-        <div class="nr-bj" v-for="item in 10">
+        <div v-show="isCpu" class="nr-bj" v-for="item in cpuContent">
           <div style="font-size: 20px;">
-            i5-13400f
+            {{ item.name }}
           </div>
           <div>
-            <img src="../../assets/imgs/bg.jpg" height="50px" alt="">
+            <img :src="item.img" height="50px" alt="">
           </div>
           <div style="width:40%;">
-            <div style="background-color:	#FF6A6A; width:100%;height: 30px;display: flex;justify-content: center;align-items: center;border-radius: 20px;">999666</div>
+            <div style="background-color:	#FF6A6A; width:100%;height: 30px;display: flex;justify-content: center;align-items: center;border-radius: 20px;">{{ item.score }}</div>
           </div>
           <div style="width:10%;">
             <div style="font-size: 20px;">
-              ￥1499
+              ￥{{ item.price }}
+            </div>
+          </div>
+        </div>
+        <div v-show="!isCpu" class="nr-bj" v-for="item in gpuContent">
+          <div style="font-size: 20px;">
+            {{ item.name }}
+          </div>
+          <div>
+            <img :src="item.img" height="50px" alt="">
+          </div>
+          <div style="width:40%;">
+            <div style="background-color:	#FF6A6A; width:100%;height: 30px;display: flex;justify-content: center;align-items: center;border-radius: 20px;">{{ item.score }}</div>
+          </div>
+          <div style="width:10%;">
+            <div style="font-size: 20px;">
+              ￥{{ item.price }}
             </div>
           </div>
         </div>
@@ -51,7 +67,59 @@ export default {
 
   data() {
     return {
-      input: ''
+      isCpu: true,
+      cpuContent: [
+        {
+          name: 'i5-13400f',
+          img: require('../../assets/imgs/bg.jpg'),
+          score: '999666',
+          price: '1499'
+        },
+        {
+          name: 'i5-13400f',
+          img: require('../../assets/imgs/bg.jpg'),
+          score: '999666',
+          price: '1499'
+        },
+        {
+          name: 'i5-13400f',
+          img: require('../../assets/imgs/bg.jpg'),
+          score: '999666',
+          price: '1499'
+        },
+        {
+          name: 'i5-13400f',
+          img: require('../../assets/imgs/bg.jpg'),
+          score: '999666',
+          price: '1499'
+        },
+        {
+          name: 'i5-13400f',
+          img: require('../../assets/imgs/bg.jpg'),
+          score: '999666',
+          price: '1499'
+        },
+        {
+          name: 'i5-13400f',
+          img: require('../../assets/imgs/bg.jpg'),
+          score: '999666',
+          price: '1499'
+        }
+      ],
+      gpuContent: [
+        {
+          name: 'RTX-2060',
+          img: require('../../assets/imgs/bg.jpg'),
+          score: '999666',
+          price: '1499'
+        },
+        {
+          name: 'RTX-3060',
+          img: require('../../assets/imgs/bg.jpg'),
+          score: '999666',
+          price: '1499'
+        },
+      ]
     }
   },
   mounted() {

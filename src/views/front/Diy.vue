@@ -3,10 +3,10 @@
     <div class="content">
       <div style="margin-top: 20px; display: flex;flex-direction: row;width: 100%;justify-content: space-around;">
         <div style="font-size: 20px;display: flex;justify-content: center;align-items: center; background-color: #fff; border: 1px solid rgb(181, 247, 242);width: 100px; height: 40px;">
-          <p>我的配置</p>
+          <p style="cursor:pointer;" @click="dialogVisible = true">我的配置</p>
         </div>
         <div style="font-size: 20px;display: flex;justify-content: center;align-items: center; background-color: #fff; border: 1px solid rgb(181, 247, 242);width: 100px; height: 40px;">
-          <p>推荐配置</p>
+          <p style="cursor:pointer;">推荐配置</p>
         </div>
       </div>
       <div class="content-nr">
@@ -24,24 +24,44 @@
             硬件价格
           </div>
         </div>
-        <div class="nr-bj" v-for="item in 10">
+        <div class="nr-bj" v-for="item in pzContent">
           <div style="font-size: 20px;">
-            CPU
+            {{ item.hardCategory }}
           </div>
           <div style="width:40%;">
-            <div style="background-color:	#fff;padding: 10px; width:100%;height: 30px;display: flex;align-items: center;font-size: 20px;text-align: left;">Intel 酷睿 i5 13600KF</div>
+            <div style="background-color:	#fff;padding: 10px; width:100%;height: 30px;display: flex;align-items: center;font-size: 20px;text-align: left;">{{ item.hardName }}</div>
           </div>
           <div>
-            <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+            <el-input-number v-model="item.num" @change="handleChange" :min="0" :max="10"></el-input-number>
           </div>
           <div style="width:5%;">
             <div style="font-size: 20px;">
-              ￥1499
+              ￥{{ item.hardPrice }}
             </div>
           </div>
         </div>
       </div>
+      <div style="display: flex;justify-content: flex-end;margin: 20px 0px 20px 0px;">
+        <el-button style="width: 400px;height: 50px;margin-right: 14%;font-size: large;font-weight: bold;" type="primary" @click="openSuccess">生成配置</el-button>
+        <div style="margin-right: 5%; font-size: 20px;font-weight: 1000;display: flex;align-items: center;">硬件总价:{{ priceNum }}</div>
+      </div>
     </div>
+    <el-dialog
+      title="我的配置"
+      :visible.sync="dialogVisible"
+      width="60%"
+      :before-close="handleClose">
+      <div style="display:flex; flex-direction: row; flex-wrap: wrap;align-content: space-between;">
+        <div style="width: 200px;height: 150px;background: #000;margin: 10px 10px 0px 0px;display: flex;flex-direction: column; justify-content: center;align-items: center;" v-for="item in 10">
+          <div><img src="../../assets/imgs/carousel-1.png" width="180px" alt=""></div>
+          <p style="color:#fff;font-weight: bold;">￥1499</p>
+        </div>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -51,7 +71,39 @@ export default {
 
   data() {
     return {
-      num: 1
+      dialogVisible: false,
+      pzContent: [
+        {
+          hardCategory: 'CPU',
+          hardName: 'Intel 酷睿 i5 13600KF',
+          num: 0,
+          hardPrice: 1499
+        },
+        {
+          hardCategory: 'CPU',
+          hardName: 'Intel 酷睿 i5 13600KF',
+          num: 0,
+          hardPrice: 1499
+        },
+        {
+          hardCategory: 'CPU',
+          hardName: 'Intel 酷睿 i5 13600KF',
+          num: 0,
+          hardPrice: 1499
+        },
+        {
+          hardCategory: 'CPU',
+          hardName: 'Intel 酷睿 i5 13600KF',
+          num: 0,
+          hardPrice: 1499
+        },
+        {
+          hardCategory: 'CPU',
+          hardName: 'Intel 酷睿 i5 13600KF',
+          num: 0,
+          hardPrice: 1499
+        }
+      ]
     }
   },
   mounted() {
@@ -59,8 +111,26 @@ export default {
   },
   // methods：本页面所有的点击事件或者其他函数定义区
   methods: {
+    openSuccess() {
+      this.$message({
+        message: '生成成功',
+        type: 'success'
+      });
+    },
     handleChange(value) {
       console.log(value);
+    },
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    }
+  },
+  computed: {
+    priceNum() {
+      return this.pzContent.reduce((sum,item) => sum+item.num*item.hardPrice,0)
     }
   }
 }
