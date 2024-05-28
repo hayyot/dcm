@@ -10,15 +10,34 @@
         </div>
       </div>
       <div class="content-nr">
-        <div class="nr-bj">
+        <div class="nr-bj" style="font-size: 20px;color:#53868B;font-weight: 1000;">
           <div>
+            硬件名称
+          </div>
+          <div>
+            硬件主图
+          </div>
+          <div style="width:40%;">
+            硬件跑分
+          </div>
+          <div style="width:10%;">
+            硬件价格
+          </div>
+        </div>
+        <div class="nr-bj" v-for="item in 10">
+          <div style="font-size: 20px;">
             i5-13400f
           </div>
           <div>
             <img src="../../assets/imgs/bg.jpg" height="50px" alt="">
           </div>
-          <div>
-            <el-progress :text-inside="true" :stroke-width="24" :percentage="100" status="exception"></el-progress>
+          <div style="width:40%;">
+            <div style="background-color:	#FF6A6A; width:100%;height: 30px;display: flex;justify-content: center;align-items: center;border-radius: 20px;">999666</div>
+          </div>
+          <div style="width:10%;">
+            <div style="font-size: 20px;">
+              ￥1499
+            </div>
           </div>
         </div>
       </div>
@@ -32,7 +51,7 @@ export default {
 
   data() {
     return {
-      
+      input: ''
     }
   },
   mounted() {
@@ -49,7 +68,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: rgb(181, 247, 242); */
+  /* background-color: rgb(247, 121, 215); */
 }
 .content {
   margin-top: 40px;
@@ -61,13 +80,14 @@ export default {
 }
 .content-nr {
   width: 100%;
-  background-color: rgb(146, 136, 144);
+  /* background-color: rgb(146, 136, 144); */
 }
 .nr-bj {
   margin-top: 10px;
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   height: 50px;
 }
 .nr-bj > div {
