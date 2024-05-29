@@ -26,17 +26,17 @@
         </div>
         <div class="nr-bj" v-for="item in pzContent">
           <div style="font-size: 20px;">
-            {{ item.hardCategory }}
+            {{ item.category }}
           </div>
           <div style="width:40%;">
-            <div style="background-color:	#fff;padding: 10px; width:100%;height: 30px;display: flex;align-items: center;font-size: 20px;text-align: left;">{{ item.hardName }}</div>
+            <div style="background-color:	#fff;padding: 10px; width:100%;height: 30px;display: flex;align-items: center;font-size: 20px;text-align: left;">{{ item.name }}</div>
           </div>
           <div>
             <el-input-number v-model="item.num" @change="handleChange" :min="0" :max="10"></el-input-number>
           </div>
           <div style="width:5%;">
             <div style="font-size: 20px;">
-              ￥{{ item.hardPrice }}
+              ￥{{ item.price }}
             </div>
           </div>
         </div>
@@ -74,40 +74,28 @@ export default {
       dialogVisible: false,
       pzContent: [
         {
-          hardCategory: 'CPU',
-          hardName: 'Intel 酷睿 i5 13600KF',
+          category: 'CPU',
+          name: 'Intel 酷睿 i5 13600KF',
           num: 0,
-          hardPrice: 1499
+          price: 1499
         },
         {
-          hardCategory: 'CPU',
-          hardName: 'Intel 酷睿 i5 13600KF',
+          category: 'CPU',
+          name: 'Intel 酷睿 i5 13600KF',
           num: 0,
-          hardPrice: 1499
+          price: 1499
         },
         {
-          hardCategory: 'CPU',
-          hardName: 'Intel 酷睿 i5 13600KF',
+          category: 'CPU',
+          name: 'Intel 酷睿 i5 13600KF',
           num: 0,
-          hardPrice: 1499
-        },
-        {
-          hardCategory: 'CPU',
-          hardName: 'Intel 酷睿 i5 13600KF',
-          num: 0,
-          hardPrice: 1499
-        },
-        {
-          hardCategory: 'CPU',
-          hardName: 'Intel 酷睿 i5 13600KF',
-          num: 0,
-          hardPrice: 1499
+          price: 1499
         }
       ]
     }
   },
   mounted() {
-    
+    this.getAllRecommend()
   },
   // methods：本页面所有的点击事件或者其他函数定义区
   methods: {
@@ -126,11 +114,20 @@ export default {
           done();
         })
         .catch(_ => {});
-    }
+    },
+    getAllRecommend() {
+      this.$request.get('/recommend/getAllRecommend').then(res => {
+        if (res.code === '200') {
+          this.pzContent = res.data
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
   },
   computed: {
     priceNum() {
-      return this.pzContent.reduce((sum,item) => sum+item.num*item.hardPrice,0)
+      return this.pzContent.reduce((sum,item) => sum+item.num*item.price,0)
     }
   }
 }

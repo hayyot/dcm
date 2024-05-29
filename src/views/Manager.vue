@@ -33,7 +33,7 @@
     <div class="manager-main">
       <!--  侧边栏  -->
       <div class="manager-main-left">
-        <el-menu :default-openeds="['info', 'user','category']" router style="border: none" :default-active="$route.path">
+        <el-menu router style="border: none" :default-active="$route.path">
           <el-menu-item index="/home">
             <i class="el-icon-s-home"></i>
             <span slot="title">系统首页</span>
@@ -65,6 +65,13 @@
             <el-menu-item index="/category">帖子分类信息</el-menu-item>
             <el-menu-item index="/blog">内容信息</el-menu-item>
             <el-menu-item index="/comment2">帖子评论信息</el-menu-item>
+          </el-submenu>
+
+          <el-submenu index="diy"  v-if="user.role === 'ADMIN'">
+            <template slot="title">
+              <i class="el-icon-menu"></i><span>diy</span>
+            </template>
+            <el-menu-item index="/diy">修改推荐信息</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>

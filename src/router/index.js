@@ -35,7 +35,8 @@ const routes = [
       {
         path: 'diy',
         name: 'diy',
-        component: () => import('../views/front/Diy.vue')
+        meta: { name: 'diy' },
+        component: () => import('../views/manager/Diy.vue')
       }
     ]
   },
